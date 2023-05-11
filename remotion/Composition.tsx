@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence, useVideoConfig, Audio, staticFile } from "remotion";
+import { AbsoluteFill, Sequence, useVideoConfig, Audio, staticFile, interpolate, useCurrentFrame } from "remotion";
 import React from "react";
 import { Title } from "./Title";
 import { Description } from "./Description";
@@ -21,6 +21,10 @@ export const MyComp = () => {
                 <Description place={i + 1} name={titles[i]} img={urls[i]}></Description>
             </Sequence>)
     }
+
+    // const frame = useCurrentFrame();
+    // const titleTopMargin = interpolate(frame, [0, 30], [0, 100], { extrapolateRight: "clamp" });
+  
     return (
         <AbsoluteFill
             style={{
@@ -33,7 +37,7 @@ export const MyComp = () => {
                 position: 'absolute',
                 left: '0',
                 right: '0',
-                margin: '100px auto',
+                margin: `200px auto`,
                 height: 'fit-content',
                 width: 'fit-content',
                 zIndex: 3
