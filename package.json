@@ -2,8 +2,9 @@
   "name": "video-maker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./crawler/main.js",
   "scripts": {
+    "start": "node ./crawler/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "preview": "npx remotion preview remotion/index.ts",
     "render": "npx remotion render remotion/index.ts MyComp out.mp4"
@@ -13,6 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "@remotion/cli": "^3.3.91",
+    "@types/react": "^18.2.6",
+    "jsdom": "^22.0.0",
     "json-loader": "^0.5.7",
     "remotion": "^3.3.91"
   }

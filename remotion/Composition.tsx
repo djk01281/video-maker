@@ -13,12 +13,11 @@ import { Description } from "./Description";
 
 export const MyComp = () => {
   const { fps, durationInFrames, width, height } = useVideoConfig();
-  const titlesJson = require("../public/titles.json");
-  const urlsJson = require("../public/urls.json");
-  const titles: string[] = titlesJson.titles;
-  const urls: string[] = urlsJson.urls;
+  const infoJson = require("../public/info.json");
+  const titles: string[] = infoJson.titles;
+  const urls: string[] = infoJson.urls;
 
-  const descriptionElements: React.Component[] = [];
+  const descriptionElements: React.ReactElement[] = [];
   for (let i = 0; i < 5; i++) {
     descriptionElements.push(
       <Sequence durationInFrames={60} from={i * 60} style={{}}>
