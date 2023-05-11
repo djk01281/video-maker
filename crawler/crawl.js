@@ -36,7 +36,7 @@ const getTitles = async (htmlString) => {
   );
   let i = 0;
   for (const item of items) {
-    if (i >= 5) {
+    if (i >= 10) {
       break;
     }
 

@@ -8,7 +8,7 @@ import {
 import React from "react";
 import "./font.css";
 
-export const Title = () => {
+export const Title = (props) => {
   const { fps, durationInFrames, width, height } = useVideoConfig();
   const frame = useCurrentFrame();
 
@@ -22,7 +22,7 @@ export const Title = () => {
   const degrees = [
     2.5, 5, 2.5, 0, -2.5, -5, -2.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ];
-  const titleDegree = interpolate(frame, [0, 300], [0, 300]);
+  const titleDegree = interpolate(frame, [0, 600], [0, 600]);
 
   return (
     <div
@@ -44,12 +44,12 @@ export const Title = () => {
             padding: "20px",
             borderRadius: "20px",
             color: "#FEE00C",
-            fontSize: "100px",
+            fontSize: "80px",
             fontWeight: "800",
             fontFamily: "Sora",
           }}
         >
-          TOP 5
+          {props.heading1}
         </span>
       </div>
       <div>
@@ -59,12 +59,12 @@ export const Title = () => {
             padding: "20px",
             borderRadius: "20px",
             color: "black",
-            fontSize: "40px",
+            fontSize: "100px",
             fontWeight: "800",
             fontFamily: "Sora",
           }}
         >
-          MOST WATCHED NETFLIX SHOWS IN KOREA
+          {props.heading2}
         </span>
       </div>
     </div>

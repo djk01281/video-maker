@@ -16,12 +16,18 @@ export const MyComp = () => {
   const infoJson = require("../public/info.json");
   const titles: string[] = infoJson.titles;
   const urls: string[] = infoJson.urls;
-
+  const heading1: string = infoJson.heading1;
+  const heading2: string = infoJson.heading2;
   const descriptionElements: React.ReactElement[] = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < titles.length; i++) {
     descriptionElements.push(
       <Sequence durationInFrames={60} from={i * 60} style={{}}>
-        <Description place={i + 1} name={titles[i]} img={urls[i]}></Description>
+        <Description
+          place={i + 1}
+          name={titles[i]}
+          img={urls[i]}
+          type={heading1}
+        ></Description>
       </Sequence>
     );
   }
@@ -50,7 +56,7 @@ export const MyComp = () => {
           zIndex: 3,
         }}
       >
-        <Title />
+        <Title heading1={heading1} heading2={heading2}></Title>
       </Sequence>
       {descriptionElements}
     </AbsoluteFill>
