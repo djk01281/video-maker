@@ -28,7 +28,7 @@ export const Description = (props) => {
   });
   const descriptionTopMargin = interpolate(driver, [0, 1], [400, 200]);
   const descriptionOpacity = interpolate(driver, [0, 1], [0, 1]);
-  const imageOpacity = interpolate(frame, [0, 45], [0, 1], {
+  const imageOpacity = interpolate(frame, [0, 45], [0.2, 1], {
     easing: Easing.bezier(0.35, 0.89, 0.22, 1),
   });
   useEffect(() => {

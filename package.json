@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preview": "npx remotion preview remotion/index.ts",
+    "render": "npx remotion render remotion/index.ts MyComp out.mp4"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@remotion/cli": "^3.3.91",
+    "json-loader": "^0.5.7",
     "remotion": "^3.3.91"
   }
 }
