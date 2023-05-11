@@ -1,4 +1,4 @@
-import { AbsoluteFill, useVideoConfig } from "remotion";
+import { AbsoluteFill, FolderContext, useVideoConfig } from "remotion";
 import React from "react";
 import "./font.css";
 
@@ -7,15 +7,23 @@ export const Description = (props) => {
 
     return (
         <div style={{ backgroundColor: 'green', zIndex: 1 }}>
-            <img src={props.img} style={{
-                zIndex: -1,
-                width: '1080px', position: 'absolute',
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-                margin: 'auto',
-            }}></img>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <img src={props.img} style={{
+                    zIndex: -1,
+                    height: '1920px',
+                    position: 'absolute',
+                    left: '50%',
+                    // right: 0,
+                    top: '50%',
+                    // bottom: 0,
+                    margin: 'auto',
+                    transform: 'translate(-50%, -50%)'
+                }}></img>
+            </div>
 
             <div style={{
                 zIndex: 0,
