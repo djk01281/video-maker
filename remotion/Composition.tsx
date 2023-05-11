@@ -1,9 +1,9 @@
-import { AbsoluteFill, Sequence, useVideoConfig } from "remotion";
+import { AbsoluteFill, Sequence, useVideoConfig, Audio, staticFile } from "remotion";
 import React from "react";
 import { Title } from "./Title";
 import { Description } from "./Description";
 
-export const MyComposition = () => {
+export const MyComp = () => {
     const { fps, durationInFrames, width, height } = useVideoConfig();
     const titles: string[] = ["The Point Men(2022)", "AKA(2023)", "Kill Boksoon(2023)", "The Prison(2017)", "Mrs. Harris Goes to Paris(2022)"]
     const urls: string[] = ["https://an2-img.amz.wtchn.net/image/v2/YW9E31ZR0HVZgppgnnxboA.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk56SXlOelkwT0RBMk56RTVOVGc0TkRnaWZRLmZNZVZEQ3dNZlhBZ1Q1U21jLVkxZUh1aU9yQWotNXhwemQzWkdGSFF0d2s",
@@ -28,6 +28,7 @@ export const MyComposition = () => {
                 zIndex: -2
             }}
         >
+            <Audio src={staticFile("/Craven Weight.mp3")} />
             <Sequence durationInFrames={Infinity} from={0} style={{
                 position: 'absolute',
                 left: '0',
