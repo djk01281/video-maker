@@ -34,10 +34,12 @@ const getTitles = async (htmlString) => {
   const items = dom.window.document.querySelectorAll(
     ".comp.mntl-sc-list-item.list-sc-item.mntl-block"
   );
+  const include = [1, 2, 3, 6, 9, 11, 13, 14, 23, 25];
   let i = 0;
   for (const item of items) {
-    if (i >= 10) {
-      break;
+    if (!include.includes(i + 1)) {
+      i++;
+      continue;
     }
 
     const headingText = item.querySelector(
