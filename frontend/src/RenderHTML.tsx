@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 function WebsiteViewer() {
   const [htmlContent, setHtmlContent] = useState("");
   const [clicked, setClicked] = useState("");
+  const [hasText, setHasText] = useState("");
 
   useEffect(() => {
     const rootElement = document.getElementById("rootElement");
@@ -17,6 +18,25 @@ function WebsiteViewer() {
     };
   }, []);
 
+  const hasDirectTextContent = (element) => {
+    if (!element.innerText) {
+      return false;
+    }
+  
+    const children = element.childNodes;
+    for (let i = 0; i < children.length; i++) {
+      if (
+        children[i].nodeType === Node.TEXT_NODE &&
+        children[i].textContent.trim() !== ""
+      ) {
+        return true;
+      }
+    }
+  
+    return false;
+  };
+  
+
   const handleElementClick = (event) => {
     const clickedElement = event.target;
     if (
@@ -26,18 +46,25 @@ function WebsiteViewer() {
       event.preventDefault(); // Prevent default navigation behavior
     }
 
-    const element = event.target;
-    setClicked(element.childNodes.length);
+    
+    setClicked(clickedElement.childNodes.length);
 
-    if (element.textContent) {
+    if (hasDirectTextContent(clickedElement)) {
       // Leaf node clicked
-      const wrapperElement = document.createElement("span");
-      wrapperElement.style.backgroundColor = "yellow";
-      wrapperElement.textContent = element.textContent;
+      setHasText("Has Text");
+      // const wrapperElement = document.createElement("span");
+      // wrapperElement.style.backgroundColor = "yellow";
+      // wrapperElement.textContent = clickedElement.textContent;
 
-      element.innerHTML = ""; // Remove existing content
-      element.appendChild(wrapperElement); // Append the wrapper element
+      // clickedElement.innerHTML = ""; // Remove existing content
+      // clickedElement.appendChild(wrapperElement); // Append the wrapper element
+      clickedElement.style.backgroundColor = 'yellow';
     }
+    else{
+      setHasText("Doesn't have text");
+    }
+    event.stopPropagation();
+
   };
 
   const fetchHtmlContent = async (url) => {
@@ -52,7 +79,7 @@ function WebsiteViewer() {
 
   return (
     <div>
-      <div>{clicked}</div>
+      <div>{hasText}</div>
       <input
         type="text"
         placeholder="Enter website URL"
