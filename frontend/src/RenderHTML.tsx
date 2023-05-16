@@ -1,23 +1,74 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function RenderHTML() {
+function WebsiteViewer() {
   const [htmlContent, setHtmlContent] = useState("");
+  const [clicked, setClicked] = useState("");
 
   useEffect(() => {
-    const url = "https://www.instyle.com/quinta-brunson-abbott-elementary-cover-story-2023-7480422";
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/"; // CORS proxy
+    const rootElement = document.getElementById("rootElement");
+    if (rootElement) {
+      rootElement.addEventListener("click", handleElementClick);
+    }
 
-    fetch(proxyUrl + url)
-      .then((response) => response.text())
-      .then((html) => {
-        setHtmlContent(html);
-      })
-      .catch((error) => {
-        console.error("Error fetching HTML:", error);
-      });
+    return () => {
+      if (rootElement) {
+        rootElement.removeEventListener("click", handleElementClick);
+      }
+    };
   }, []);
 
-  return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+  const handleElementClick = (event) => {
+    if (
+      event.target.tagName.toLowerCase() === "a" ||
+      event.target.tagName.toLowerCase() === "img"
+    ) {
+      event.preventDefault(); // Prevent default navigation behavior
+    }
+  
+    const element = event.target;
+    setClicked(element.childNodes.length)
+    if (element.childNodes.length <= 1) {
+      // Leaf node clicked
+      const wrapperElement = document.createElement("span");
+      wrapperElement.style.backgroundColor = "yellow";
+      wrapperElement.textContent = element.textContent;
+  
+      element.innerHTML = ""; // Remove existing content
+      element.appendChild(wrapperElement); // Append the wrapper element
+    }
+  };
+  
+  
+  
+  
+  
+
+  const fetchHtmlContent = async (url) => {
+    try {
+      const response = await fetch(url);
+      const html = await response.text();
+      setHtmlContent(html);
+    } catch (error) {
+      console.error("Error fetching HTML:", error);
+    }
+  };
+
+  return (
+    <div>
+      <div>
+      {clicked}
+      </div>
+      <input
+        type="text"
+        placeholder="Enter website URL"
+        onChange={(e) => fetchHtmlContent(e.target.value)}
+      />
+      <div
+        id="rootElement"
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      />
+    </div>
+  );
 }
 
-export default RenderHTML;
+export default WebsiteViewer;
