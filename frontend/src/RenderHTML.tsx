@@ -18,15 +18,17 @@ function WebsiteViewer() {
   }, []);
 
   const handleElementClick = (event) => {
+    const clickedElement = event.target;
     if (
-      event.target.tagName.toLowerCase() === "a" ||
-      event.target.tagName.toLowerCase() === "img"
+      clickedElement.tagName.toLowerCase() === "a" ||
+      clickedElement.tagName.toLowerCase() === "img"
     ) {
       event.preventDefault(); // Prevent default navigation behavior
     }
 
     const element = event.target;
     setClicked(element.childNodes.length);
+
     if (element.textContent) {
       // Leaf node clicked
       const wrapperElement = document.createElement("span");
