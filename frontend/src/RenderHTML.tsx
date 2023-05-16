@@ -27,7 +27,7 @@ function WebsiteViewer() {
   
     const element = event.target;
     setClicked(element.childNodes.length)
-    if (element.childNodes.length <= 1) {
+    if (element.childNodes.textContent) {
       // Leaf node clicked
       const wrapperElement = document.createElement("span");
       wrapperElement.style.backgroundColor = "yellow";
