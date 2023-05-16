@@ -24,24 +24,19 @@ function WebsiteViewer() {
     ) {
       event.preventDefault(); // Prevent default navigation behavior
     }
-  
+
     const element = event.target;
-    setClicked(element.childNodes.length)
-    if (element.childNodes.textContent) {
+    setClicked(element.childNodes.length);
+    if (element.textContent) {
       // Leaf node clicked
       const wrapperElement = document.createElement("span");
       wrapperElement.style.backgroundColor = "yellow";
       wrapperElement.textContent = element.textContent;
-  
+
       element.innerHTML = ""; // Remove existing content
       element.appendChild(wrapperElement); // Append the wrapper element
     }
   };
-  
-  
-  
-  
-  
 
   const fetchHtmlContent = async (url) => {
     try {
@@ -55,18 +50,13 @@ function WebsiteViewer() {
 
   return (
     <div>
-      <div>
-      {clicked}
-      </div>
+      <div>{clicked}</div>
       <input
         type="text"
         placeholder="Enter website URL"
         onChange={(e) => fetchHtmlContent(e.target.value)}
       />
-      <div
-        id="rootElement"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
+      <div id="rootElement" dangerouslySetInnerHTML={{ __html: htmlContent }} />
     </div>
   );
 }
