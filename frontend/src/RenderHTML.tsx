@@ -81,6 +81,24 @@ function WebsiteViewer() {
 
       const html = await response.text();
       setHtmlContent(html);
+
+      // Extract CSS and JS resources from HTML content
+      // const parser = new DOMParser();
+      // const doc = parser.parseFromString(html, "text/html");
+      // const cssResources = Array.from(
+      //   doc.querySelectorAll('link[type="text/css"]')
+      // ).map((link) => link.href);
+
+      // Load CSS resources
+      // cssResources.forEach((cssResource) => {
+      //   console.log(cssResource)
+
+      //   const link = document.createElement("link");
+      //   link.rel = "stylesheet";
+      //   link.href = cssResource;
+      //   document.head.appendChild(link);
+      // });
+
       document.addEventListener("click", (event) => {
         const clickedElement = event.target;
         if (clickedElement.tagName.toLowerCase() === "a") {
