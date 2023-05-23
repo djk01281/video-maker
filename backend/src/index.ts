@@ -14,12 +14,25 @@ const app = express();
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, "..", "..", "frontend", "build")));
+// Middleware to parse JSON-encoded bodies
+app.use(express.json());
 
+// Middleware to parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.sendFile(
     path.join(__dirname, "..", "..", "frontend", "build", "index.html")
   );
   console.log("home");
+});
+
+app.post("/api/video", async (req, res) => {
+  try {
+    const data = req.body;
+    res.send(`titles: ${data.titles}, urls: ${data.urls}`);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 app.get("/api/html/*", async (req, res) => {
