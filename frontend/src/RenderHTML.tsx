@@ -4,7 +4,6 @@ function WebsiteViewer() {
   const [htmlContent, setHtmlContent] = useState("");
   const [hasText, setHasText] = useState("");
 
-
   useEffect(() => {
     const rootElement = document.getElementById("rootElement");
     if (rootElement) {
@@ -29,10 +28,7 @@ function WebsiteViewer() {
 
     const children = element.childNodes;
     for (let i = 0; i < children.length; i++) {
-      if (
-        children[i].nodeType === Node.TEXT_NODE &&
-        children[i].textContent !== ""
-      ) {
+      if (children[i].nodeType === Node.TEXT_NODE) {
         return true;
       }
     }

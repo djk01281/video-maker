@@ -79,7 +79,7 @@ app.get("/api/html/*", async (req, res) => {
               clearInterval(timer);
               resolve();
             }
-          }, 100);
+          }, 10);
         });
       });
     }
