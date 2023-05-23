@@ -2,34 +2,27 @@ import React, { useState, useEffect, lazy } from "react";
 
 function WebsiteViewer() {
   const [htmlContent, setHtmlContent] = useState("");
-  const [clicked, setClicked] = useState("");
   const [hasText, setHasText] = useState("");
 
-  useEffect(() => {
-    const lazyImages = document.querySelectorAll("img[data-src]");
-    lazyImages.forEach((lazyImage) => {
-      const dataSrc = lazyImage.getAttribute("data-src");
-      if (dataSrc) {
-        lazyImage.setAttribute("src", dataSrc);
-        lazyImage.removeAttribute("data-src");
-      }
-    });
-  }, [htmlContent]);
 
   useEffect(() => {
     const rootElement = document.getElementById("rootElement");
     if (rootElement) {
-      rootElement.addEventListener("click", handleElementClick);
+      rootElement.addEventListener("click", (event) => {
+        handleElementClick(event);
+      });
     }
 
     return () => {
       if (rootElement) {
-        rootElement.removeEventListener("click", handleElementClick);
+        rootElement.removeEventListener("click", (event) => {
+          handleElementClick(event);
+        });
       }
     };
   }, []);
 
-  const hasDirectTextContent = (element) => {
+  const hasDirectTextContent = (element: HTMLElement) => {
     if (!element.innerText) {
       return false;
     }
@@ -38,7 +31,7 @@ function WebsiteViewer() {
     for (let i = 0; i < children.length; i++) {
       if (
         children[i].nodeType === Node.TEXT_NODE &&
-        children[i].textContent.trim() !== ""
+        children[i].textContent !== ""
       ) {
         return true;
       }
@@ -47,8 +40,8 @@ function WebsiteViewer() {
     return false;
   };
 
-  const handleElementClick = (event) => {
-    const clickedElement = event.target;
+  const handleElementClick = (event: MouseEvent) => {
+    const clickedElement = event.target as HTMLElement;
     if (
       clickedElement.tagName.toLowerCase() === "a" ||
       clickedElement.tagName.toLowerCase() === "img"
@@ -56,24 +49,17 @@ function WebsiteViewer() {
       event.preventDefault(); // Prevent default navigation behavior
     }
 
-    setClicked(clickedElement.childNodes.length);
-
     if (hasDirectTextContent(clickedElement)) {
       // Leaf node clicked
       setHasText("Has Text");
-      // const wrapperElement = document.createElement("span");
-      // wrapperElement.style.backgroundColor = "yellow";
-      // wrapperElement.textContent = clickedElement.textContent;
 
-      // clickedElement.innerHTML = ""; // Remove existing content
-      // clickedElement.appendChild(wrapperElement); // Append the wrapper element
       clickedElement.style.backgroundColor = "yellow";
     } else {
       setHasText("Doesn't have text");
     }
   };
 
-  const fetchHtmlContent = async (url) => {
+  const fetchHtmlContent = async (url: string) => {
     try {
       const backendURL = "/api/html/";
 
@@ -82,26 +68,9 @@ function WebsiteViewer() {
       const html = await response.text();
       setHtmlContent(html);
 
-      // Extract CSS and JS resources from HTML content
-      // const parser = new DOMParser();
-      // const doc = parser.parseFromString(html, "text/html");
-      // const cssResources = Array.from(
-      //   doc.querySelectorAll('link[type="text/css"]')
-      // ).map((link) => link.href);
-
-      // Load CSS resources
-      // cssResources.forEach((cssResource) => {
-      //   console.log(cssResource)
-
-      //   const link = document.createElement("link");
-      //   link.rel = "stylesheet";
-      //   link.href = cssResource;
-      //   document.head.appendChild(link);
-      // });
-
-      document.addEventListener("click", (event) => {
-        const clickedElement = event.target;
-        if (clickedElement.tagName.toLowerCase() === "a") {
+      document.addEventListener("click", (event: MouseEvent) => {
+        const clickedElement = event.target as HTMLElement;
+        if (clickedElement && clickedElement.tagName.toLowerCase() === "a") {
           event.preventDefault(); // Prevent default navigation behavior for all <a> tags
         }
       });

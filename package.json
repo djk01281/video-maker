@@ -2,9 +2,9 @@
   "name": "video-maker",
   "version": "1.0.0",
   "description": "",
-  "main": "./crawler/main.js",
+  "main": "./backend/dist/index.js",
   "scripts": {
-    "start": "node ./crawler/main.js",
+    "start": "node ./backend/dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "preview": "npx remotion preview remotion/index.ts",
     "render": "npx remotion render remotion/index.ts MyComp out.mp4"

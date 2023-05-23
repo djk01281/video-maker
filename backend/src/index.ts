@@ -1,17 +1,25 @@
 import express from "express";
-import fetch from "node-fetch";
+// import fetch from "node-fetch";
 import cors from "cors";
 import { JSDOM } from "jsdom";
 import { Readability } from "@mozilla/readability";
 import puppeteer from "puppeteer";
-import { isGeneratorFunction } from "util/types";
+import path from "path";
 
+const __filename = fileURLToPath(import.meta.url);
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(__filename);
 const app = express();
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, "..", "..", "frontend", "build")));
+
 app.get("/", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "..", "frontend", "build", "index.html")
+  );
   console.log("home");
-  res.send("Heollllo");
 });
 
 app.get("/api/html/*", async (req, res) => {
