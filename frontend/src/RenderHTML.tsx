@@ -58,8 +58,8 @@ function WebsiteViewer() {
   const fetchHtmlContent = async (url: string) => {
     try {
       const backendURL = "/api/html/";
-
-      const response = await fetch(backendURL + url);
+      const encodedURL = encodeURIComponent(url);
+      const response = await fetch(backendURL + encodedURL);
 
       const html = await response.text();
       setHtmlContent(html);

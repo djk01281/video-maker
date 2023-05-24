@@ -8,11 +8,9 @@ const apiHtmlController = async (
   res: express.Response
 ) => {
   try {
-    const browser = await puppeteer.launch(); // for test disable the headlels mode,
-    const page = await browser.newPage();
-    const url: string =
-      "https://www.instyle.com/best-places-to-buy-shoes-7499811";
-
+    const browser: puppeteer.Browser = await puppeteer.launch(); // for test disable the headlels mode,
+    const page: puppeteer.Page = await browser.newPage();
+    const url: string = typeof req.params.url === "string" ? req.params.url : "";
     async function autoScroll(page: puppeteer.Page): Promise<void> {
       await page.evaluate(async () => {
         await new Promise<void>((resolve) => {
