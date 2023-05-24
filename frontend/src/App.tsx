@@ -46,11 +46,24 @@ function App() {
     return false;
   };
 
+  const handleDelete: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    const alteredArr: string[] = [];
+    const clickedButton = event.target as HTMLButtonElement;
+
+    const index = parseInt(clickedButton.id, 10);
+    for (let i = 0; i < selectedText.length; i++) {
+      if (i !== index) {
+        alteredArr.push(selectedText[i]);
+      }
+    }
+    setSelectedText(alteredArr);
+  };
+
   return (
     <div className="App">
       <div>HELLO</div>
       <RenderHTML onClick={handleOnClick}></RenderHTML>
-      <Preview selectedText={selectedText}></Preview>
+      <Preview selectedText={selectedText} onDelete={handleDelete}></Preview>
     </div>
   );
 }

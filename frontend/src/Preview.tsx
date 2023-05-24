@@ -1,6 +1,9 @@
 import React, { useState, useEffect, lazy } from "react";
 
-const Preview: React.FC<{ selectedText: string[] }> = (props) => {
+const Preview: React.FC<{
+  selectedText: string[];
+  onDelete: React.MouseEventHandler<HTMLButtonElement>;
+}> = (props) => {
   const [htmlContent, setHtmlContent] = useState("");
   const [hasText, setHasText] = useState("");
 
@@ -18,14 +21,20 @@ const Preview: React.FC<{ selectedText: string[] }> = (props) => {
       }),
     });
   };
+
   return (
     <div className="Preview">
       <div className="button-container">
         <button onClick={handleButtonClick}>GENERATE</button>
       </div>
       <div className="selected-container">
-        {props.selectedText.map((text) => (
-          <div>{text}</div>
+        {props.selectedText.map((text, index) => (
+          <div className="selected">
+            {text}{" "}
+            <button id={index.toString()} onClick={props.onDelete}>
+              X
+            </button>
+          </div>
         ))}
       </div>
     </div>
