@@ -6,7 +6,8 @@ const apiVideoController = async (
 ) => {
   try {
     const data = req.body;
-    res.send(`titles: ${data.titles}, urls: ${data.urls}`);
+    console.log(data.titles);
+    res.send(`titles: ${data.titles}`);
   } catch (error) {
     res.send(error);
   }
